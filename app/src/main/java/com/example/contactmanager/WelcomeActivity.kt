@@ -40,14 +40,20 @@ class WelcomeActivity : ComponentActivity() {
             database = FirebaseDatabase.getInstance().getReference("Contact")
             //stores input in db in node called 'Contact'
             database.child(name).setValue(contacts).addOnSuccessListener {
-                dialog.show()
+                etName.text?.clear()
+                etContactNumber.text?.clear()
+            }
+                .addOnSuccessListener {
+                    Toast.makeText(this,"failed",Toast.LENGTH_SHORT).show()
+                }
+            dialog.show()
+
+            //button to close dialog box
+            val btnOkay = findViewById<Button>(R.id.btnOkay)
+            btnOkay.setOnClickListener {
+            dialog.dismiss()
             }
             
-        }
-        //button to close dialog box
-        val btnOkay = findViewById<Button>(R.id.btnOkay)
-        btnOkay.setOnClickListener {
-            dialog.dismiss()
         }
     }
 }
